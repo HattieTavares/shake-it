@@ -1,6 +1,6 @@
 # Shake-It
 
-A simple React app that allows users to upload a picture and customize it into looking like a polaroid picture, complete with a vintage filter option and "handwritten" text.
+A simple React app that allows users to upload a picture, customize it to look like a vintage polaroid picture, complete with photo filter options and "handwritten" text fonts as an overlay.
 
 **Link to project:** coming soon
 
@@ -8,7 +8,7 @@ A simple React app that allows users to upload a picture and customize it into l
 
 ## How It's Made:
 
-**Tech used:** React, Vite
+**Tech used:** React, Vite, MUI, local storage
 
 ## Optimizations
 

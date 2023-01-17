@@ -1,0 +1,6 @@
+body {
+    background-image: url("/corkBackground.jpg");
+    background-color: #cccccc;
+    background-size: contain;
+    background-position: center;
+}

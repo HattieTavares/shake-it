@@ -1,12 +1,19 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react'
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import Image from "./components/Image"
+import Customizations from "./components/Customizations"
+import Overview from './components/Overview'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <h1>Shake-It</h1>
+      <Header />
+      <Overview />
+      <Image />
+      <Customizations />
+      <Footer />
     </div>
   )
 }
