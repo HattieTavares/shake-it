@@ -1,6 +1,7 @@
-body {
+/* body {
     background-image: url("/corkBackground.jpg");
+    background-repeat: no-repeat;
     background-color: #cccccc;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-}
+} */
