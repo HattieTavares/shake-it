@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Box } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
-import { shadows } from '@mui/system';
+import { styled } from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 
 function Image() {
@@ -16,9 +16,15 @@ function Image() {
         setImageFile(URL.createObjectURL(e.target.files[0]))
     }
 
-    const renderImage = () => {
-        <img src={imageFile} alt="Your Uploaded Photo" />
-    }
+    const StyledImage = styled('img')(props => ({
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+      }))
+
+    const renderImage = () => (
+        <StyledImage src={imageFile} alt="Your Uploaded Photo" />
+    )
 
     return(
         <Grid sx={{
@@ -35,7 +41,7 @@ function Image() {
             >
                 <Box onClick={() => uploadImageRef.current && uploadImageRef.current.click()}
 
-                style={{
+                sx={{
                     background: "#373b3b",
                     height: "310px",
                     width: "310px",
@@ -45,7 +51,7 @@ function Image() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    cursor: "pointer"
+                    cursor: "pointer",
                 }}>
                 {imageFile ? renderImage() : <p>Upload Image</p>}
                 </Box>
