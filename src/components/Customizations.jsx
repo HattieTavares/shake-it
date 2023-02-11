@@ -1,24 +1,15 @@
 import React from 'react'
 import TextInput from './TextInput'
-import Dropdown from './Dropdown'
+import FilterDropdown from './FilterDropdown'
+import FontDropdown from './FontDropdown'
 
 export default function Customizations() {
 
   return (
     <div>
         <TextInput />
-        <Dropdown
-          name="Font Choices"
-          choiceOne="Just Me Again Down Here"
-          choiceTwo="La Belle Aurore"
-          choiceThree="Permanent Marker"
-        />
-        <Dropdown
-          name="Filter Choices"
-          choiceOne="Vintage"
-          choiceTwo="Black and White"
-          choiceThree="Sepia"
-        />
+        <FontDropdown />
+        <FilterDropdown />
     </div>
   )
 }

@@ -1,0 +1,15 @@
+.vintage-filter {
+    -webkit-filter: sepia(.5) hue-rotate(-30deg) saturate(1.4);
+    filter: sepia(.5) hue-rotate(-30deg) saturate(1.4);
+}  
+
+.sepia-filter {
+    -webkit-filter: sepia(.75) contrast(.75) brightness(1.25) saturate(1.4);
+    filter: sepia(.75) contrast(.75) brightness(1.25) saturate(1.4);
+}
+
+.baw-filter {
+    -webkit-filter: brightness(1.25) contrast(.85) grayscale(1);
+    filter: brightness(1.25) contrast(.85) grayscale(1);
+}
+

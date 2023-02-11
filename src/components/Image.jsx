@@ -1,16 +1,21 @@
 import React from 'react'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { Box } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
 import { styled } from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
+import { CustomContext } from '../App';
+import "../styles/filters.css"
 
 function Image() {
 
     const uploadImageRef = useRef(null);
 
     const [imageFile, setImageFile] = useState(null)
+
+    const { filterSelection } = useContext(CustomContext)
+    console.log(filterSelection)
 
     const handleChange = (e) => {
         setImageFile(URL.createObjectURL(e.target.files[0]))
@@ -23,7 +28,7 @@ function Image() {
       }))
 
     const renderImage = () => (
-        <StyledImage src={imageFile} alt="Your Uploaded Photo" />
+        <StyledImage className={filterSelection} src={imageFile} alt="Your Uploaded Photo" />
     )
 
     return(
