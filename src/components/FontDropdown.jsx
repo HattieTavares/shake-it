@@ -12,6 +12,8 @@ export default function FontDropdown() {
 
   const handleChange = (e) => setFontSelection(e.target.value)
 
+  console.log(fontSelection)
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

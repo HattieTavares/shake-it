@@ -11,13 +11,19 @@ export const CustomContext = createContext();
 function App() {
   const [fontSelection, setFontSelection] = useState('');
   const [filterSelection, setFilterSelection] = useState('');
+  const [userText, setUserText] = useState({
+    topText: "",
+    bottomText: ""
+});
 
   return (
     <CustomContext.Provider value={{
       fontSelection,
       setFontSelection,
       filterSelection,
-      setFilterSelection
+      setFilterSelection,
+      userText,
+      setUserText
     }}>
       <div className="App"
         style={{

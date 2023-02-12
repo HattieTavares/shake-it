@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { styled } from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
-import "../styles/filters.css"
+import "../styles/userStyling.css"
 
 function Image() {
 
@@ -15,7 +15,10 @@ function Image() {
     const [imageFile, setImageFile] = useState(null)
 
     const { filterSelection } = useContext(CustomContext)
-    console.log(filterSelection)
+
+    const { fontSelection } = useContext(CustomContext)
+
+    const { userText } = useContext(CustomContext)
 
     const handleChange = (e) => {
         setImageFile(URL.createObjectURL(e.target.files[0]))
@@ -42,7 +45,9 @@ function Image() {
                 backgroundImage: `url(${polaroidFrame})`,
                 backgroundRepeat: "no-repeat",
                 height: "420px",
-                width: "350px",}}
+                width: "350px",
+                textAlign: "center",
+                }}
             >
                 <Box onClick={() => uploadImageRef.current && uploadImageRef.current.click()}
 
@@ -60,6 +65,8 @@ function Image() {
                 }}>
                 {imageFile ? renderImage() : <p>Upload Image</p>}
                 </Box>
+                <p className={fontSelection}>{userText.topText}</p>
+                <p className={fontSelection}>{userText.bottomText}</p>
             </Box>
             <input onChange={handleChange} ref={uploadImageRef} type={"file"} accept={"image/*"} hidden />
             <Button disabled={!imageFile} variant="outlined">Download Photo</Button>

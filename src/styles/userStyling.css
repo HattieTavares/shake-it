@@ -13,3 +13,14 @@
     filter: brightness(1.25) contrast(.85) grayscale(1);
 }
 
+.just-me-font {
+    font-family: 'Just Me Again Down Here', cursive;
+}
+
+.la-belle-font {
+    font-family: 'La Belle Aurore', cursive;
+}
+
+.marker-font {
+    font-family: 'Permanent Marker', cursive;
+}
