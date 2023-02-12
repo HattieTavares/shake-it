@@ -3,7 +3,7 @@ import { useContext, useRef, useState } from 'react'
 import { Box } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled} from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
@@ -55,12 +55,12 @@ function Image() {
             alignItems: "center",
         }}>
             <Box sx={{
+                boxShadow:  2,
                 backgroundImage: `url(${polaroidFrame})`,
                 backgroundRepeat: "no-repeat",
                 height: "420px",
                 width: "350px",
                 textAlign: "center",
-                paddingTop: "20px",
                 }}
                 ref={imageResultRef}
             >
@@ -71,6 +71,7 @@ function Image() {
                     height: "310px",
                     width: "310px",
                     marginLeft: "20px",
+                    marginTop: "20px",
                     color: "white",
                     display: "flex",
                     alignItems: "center",
