@@ -15,11 +15,11 @@ export default function FilterDropdown() {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel>Filters</InputLabel>
+        <InputLabel>-- Choose a Filter --</InputLabel>
         <Select
           onChange={handleChange}
           value={filterSelection}
-          label="Filter Choices"
+          label="filters"
         >
           {filterChoices.map(filter => <MenuItem value={filter.class} key={filter.class}>{filter.name}</MenuItem>)}
         </Select>

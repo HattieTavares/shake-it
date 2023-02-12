@@ -7,10 +7,14 @@ import { styled } from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 function Image() {
 
     const uploadImageRef = useRef(null);
+
+    const imageResultRef = useRef(null);
 
     const [imageFile, setImageFile] = useState(null)
 
@@ -22,6 +26,16 @@ function Image() {
 
     const handleChange = (e) => {
         setImageFile(URL.createObjectURL(e.target.files[0]))
+    }
+
+    const handleDownload = () => {
+        domtoimage.toBlob(imageResultRef.current)
+        .then(function (blob) {
+            saveAs(blob, 'my-shake-it.png');
+        })
+        .catch(function (error) {
+            console.log("Oops, something went wrong.", error)
+        })  
     }
 
     const StyledImage = styled('img')(props => ({
@@ -41,13 +55,14 @@ function Image() {
             alignItems: "center",
         }}>
             <Box sx={{
-                boxShadow: 2,
                 backgroundImage: `url(${polaroidFrame})`,
                 backgroundRepeat: "no-repeat",
                 height: "420px",
                 width: "350px",
                 textAlign: "center",
+                paddingTop: "20px",
                 }}
+                ref={imageResultRef}
             >
                 <Box onClick={() => uploadImageRef.current && uploadImageRef.current.click()}
 
@@ -55,7 +70,6 @@ function Image() {
                     background: "#373b3b",
                     height: "310px",
                     width: "310px",
-                    marginTop: "20px",
                     marginLeft: "20px",
                     color: "white",
                     display: "flex",
@@ -69,7 +83,7 @@ function Image() {
                 <p className={fontSelection}>{userText.bottomText}</p>
             </Box>
             <input onChange={handleChange} ref={uploadImageRef} type={"file"} accept={"image/*"} hidden />
-            <Button disabled={!imageFile} variant="outlined">Download Photo</Button>
+            <Button disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Photo</Button>
         </Grid>
     )
 }
