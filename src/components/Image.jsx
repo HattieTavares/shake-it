@@ -7,7 +7,8 @@ import { styled} from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
-import domtoimage from 'dom-to-image';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
 
 function Image() {
@@ -29,13 +30,13 @@ function Image() {
     }
 
     const handleDownload = () => {
-        domtoimage.toBlob(imageResultRef.current)
-        .then(function (blob) {
-            saveAs(blob, 'my-shake-it.png');
+        htmlToImage.toPng(imageResultRef.current)
+        .then(function (dataUrl) {
+            saveAs(dataUrl, 'my-shake-it.png');
         })
         .catch(function (error) {
             console.log("Oops, something went wrong.", error)
-        })  
+        })
     }
 
     const StyledImage = styled('img')(props => ({
