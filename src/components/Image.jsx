@@ -65,6 +65,7 @@ function Image() {
                 textAlign: "center",
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "space-between"
                 }}
                 ref={imageResultRef}
             >
@@ -85,8 +86,10 @@ function Image() {
                 }}>
                 {imageFile ? renderImage() : <p>Upload Image</p>}
                 </Box>
-                <p className={fontSelection}>{userText.topText}</p>
-                <p className={fontSelection}>{userText.bottomText}</p>
+                <Box sx={{display:"flex", flexDirection:"column", justifyContent:"space-around", height:"90px",}}>
+                    <span className={fontSelection}>{userText.topText}</span>
+                    <span className={fontSelection}>{userText.bottomText}</span>
+                </Box>
             </Box>
             <input onChange={handleChange} ref={uploadImageRef} type={"file"} accept={"image/*"} hidden />
             <Button disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Photo</Button>
