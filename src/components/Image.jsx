@@ -57,11 +57,14 @@ function Image() {
         }}>
             <Box sx={{
                 boxShadow:  2,
+                
                 backgroundImage: `url(${polaroidFrame})`,
                 backgroundRepeat: "no-repeat",
                 height: "420px",
                 width: "350px",
                 textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
                 }}
                 ref={imageResultRef}
             >
@@ -71,13 +74,14 @@ function Image() {
                     background: "#373b3b",
                     height: "310px",
                     width: "310px",
-                    marginLeft: "20px",
-                    marginTop: "20px",
                     color: "white",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     cursor: "pointer",
+                    position: "relative",
+                    left: "20px",
+                    top: "20px",
                 }}>
                 {imageFile ? renderImage() : <p>Upload Image</p>}
                 </Box>
