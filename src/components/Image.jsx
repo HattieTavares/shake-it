@@ -8,6 +8,7 @@ import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
 import * as htmlToImage from 'html-to-image';
+import domtoimage from 'dom-to-image-more';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
 
@@ -29,10 +30,20 @@ function Image() {
         setImageFile(URL.createObjectURL(e.target.files[0]))
     }
 
+    // const handleDownload = () => {
+    //     htmlToImage.toPng(imageResultRef.current)
+    //     .then(function (dataUrl) {
+    //         saveAs(dataUrl, 'my-shake-it.png');
+    //     })
+    //     .catch(function (error) {
+    //         console.log("Oops, something went wrong.", error)
+    //     })
+    // }
+
     const handleDownload = () => {
-        htmlToImage.toPng(imageResultRef.current)
-        .then(function (dataUrl) {
-            saveAs(dataUrl, 'my-shake-it.png');
+        domtoimage.toBlob(imageResultRef.current)
+        .then(function (blob) {
+            saveAs(blob, 'my-shake-it.png');
         })
         .catch(function (error) {
             console.log("Oops, something went wrong.", error)
