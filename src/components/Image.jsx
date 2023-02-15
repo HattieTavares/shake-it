@@ -10,6 +10,7 @@ import "../styles/userStyling.css"
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
+import html2canvas from "html2canvas";
 
 function Image() {
 
@@ -29,13 +30,48 @@ function Image() {
         setImageFile(URL.createObjectURL(e.target.files[0]))
     }
 
-    const handleDownload = async () => {
-        try {
-            const data = await toBlob(imageResultRef.current)
-            saveAs(data, 'my-shake-it.png');
+    function checkBrowser() {
+        const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+        const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if(isSafari || iOS) {
+            return true
+        } else {
+            return false
         }
-        catch(error) {
-            console.log("Oops, something went wrong.", error)
+    }
+
+    const canvasDownload = async () => {
+        const canvas = await html2canvas(imageResultRef.current);
+        const dataURL = canvas.toDataURL('image/png');
+        saveAs(dataURL, 'my-shake-it.png', 'image/png');
+    };
+
+
+    const handleDownload = () => {
+        const safari = checkBrowser()
+        console.log(safari)
+        if(safari) {
+            canvasDownload()
+            // htmlToImage.toPng(imageResultRef.current)
+            // .then(function (dataUrl) {
+            //     saveAs(dataUrl, 'my-shake-it.png');
+            //     //need to run twice for Safari to download properly
+            //     htmlToImage.toPng(imageResultRef.current)
+            //     .then(function (dataUrl) {
+            //         saveAs(dataUrl, 'my-shake-it.png');
+            //     })
+            //     .catch(function (error) {
+            //         console.log("Oops, something went wrong.", error)
+            //     })
+            // })
+        } else {
+            htmlToImage.toPng(imageResultRef.current)
+            .then(function (dataUrl) {
+                saveAs(dataUrl, 'my-shake-it.png');
+            })
+            .catch(function (error) {
+                console.log("Oops, something went wrong.", error)
+            })
         }
     }
 
