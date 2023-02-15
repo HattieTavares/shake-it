@@ -8,7 +8,6 @@ import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
 import * as htmlToImage from 'html-to-image';
-import domtoimage from 'dom-to-image-more';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
 
@@ -30,24 +29,39 @@ function Image() {
         setImageFile(URL.createObjectURL(e.target.files[0]))
     }
 
-    // const handleDownload = () => {
-    //     htmlToImage.toPng(imageResultRef.current)
-    //     .then(function (dataUrl) {
-    //         saveAs(dataUrl, 'my-shake-it.png');
-    //     })
-    //     .catch(function (error) {
-    //         console.log("Oops, something went wrong.", error)
-    //     })
-    // }
+    function checkBrowser() {
+        let userAgentString = navigator.userAgent;
+        let safariAgent = userAgentString.indexOf("Safari") > -1;
+        let chromeAgent = userAgentString.indexOf("Chrome") > -1;
+        if ((chromeAgent) && (safariAgent)) safariAgent = false;
+        return safariAgent
+    }
 
     const handleDownload = () => {
-        domtoimage.toBlob(imageResultRef.current)
-        .then(function (blob) {
-            saveAs(blob, 'my-shake-it.png');
-        })
-        .catch(function (error) {
-            console.log("Oops, something went wrong.", error)
-        })
+        const safari = checkBrowser()
+        console.log(safari)
+        if(safari) {
+            htmlToImage.toPng(imageResultRef.current)
+            .then(function (dataUrl) {
+                saveAs(dataUrl, 'my-shake-it.png');
+                //need to run twice for Safari to download properly
+                htmlToImage.toPng(imageResultRef.current)
+                .then(function (dataUrl) {
+                    saveAs(dataUrl, 'my-shake-it.png');
+                })
+                .catch(function (error) {
+                    console.log("Oops, something went wrong.", error)
+                })
+            })
+        } else {
+            htmlToImage.toPng(imageResultRef.current)
+            .then(function (dataUrl) {
+                saveAs(dataUrl, 'my-shake-it.png');
+            })
+            .catch(function (error) {
+                console.log("Oops, something went wrong.", error)
+            })
+        }
     }
 
     const StyledImage = styled('img')(props => ({
