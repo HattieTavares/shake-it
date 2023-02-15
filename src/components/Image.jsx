@@ -30,16 +30,17 @@ function Image() {
     }
 
     function checkBrowser() {
-        let userAgentString = navigator.userAgent;
-        let safariAgent = userAgentString.indexOf("Safari") > -1;
-        let chromeAgent = userAgentString.indexOf("Chrome") > -1;
-        if ((chromeAgent) && (safariAgent)) safariAgent = false;
-        return safariAgent
+        const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+        const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if(isSafari || iOS) {
+            return true
+        } else {
+            return false
+        }
     }
 
     const handleDownload = () => {
         const safari = checkBrowser()
-        console.log(safari)
         if(safari) {
             htmlToImage.toPng(imageResultRef.current)
             .then(function (dataUrl) {
