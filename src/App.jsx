@@ -34,6 +34,7 @@ function App() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          textAlign: "center",
         }}
       >
         <Header />
