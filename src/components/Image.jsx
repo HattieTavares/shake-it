@@ -29,48 +29,13 @@ function Image() {
         setImageFile(URL.createObjectURL(e.target.files[0]))
     }
 
-    function checkBrowser() {
-        const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-        const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if(isSafari || iOS) {
-            return true
-        } else {
-            return false
+    const handleDownload = async () => {
+        try {
+            const data = await toBlob(imageResultRef.current)
+            saveAs(data, 'my-shake-it.png');
         }
-    }
-
-    const handleDownload = () => {
-        const safari = checkBrowser()
-        console.log(safari)
-        if(safari) {
-            htmlToImage.toPng(imageResultRef.current)
-            .then(function (dataURL1) {
-                var link = document.createElement("a");
-                link.download = "my-shake-it.png";
-                link.href = dataURL1;
-                link.click();
-
-                htmlToImage.toPng(imageResultRef.current)
-                .then(function (dataURL2) {
-                    var link = document.createElement("a");
-                    link.download = "my-shake-it.png";
-                    link.href = dataURL2;
-                    link.click();
-
-                    resolve(dataURL2);
-                });
-            })
-            .catch(function (error) {
-                console.log("Oops, something went wrong.", error)
-            })
-        } else {
-            htmlToImage.toPng(imageResultRef.current)
-            .then(function (dataUrl) {
-                saveAs(dataUrl, 'my-shake-it.png');
-            })
-            .catch(function (error) {
-                console.log("Oops, something went wrong.", error)
-            })
+        catch(error) {
+            console.log("Oops, something went wrong.", error)
         }
     }
 
