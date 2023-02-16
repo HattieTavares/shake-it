@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useCallback, useRef, useState } from 'react'
 import { Box } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
@@ -11,6 +11,7 @@ import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
 import html2canvas from "html2canvas";
+import screenshot from 'image-screenshot';
 
 function Image() {
 
@@ -40,33 +41,50 @@ function Image() {
         }
     }
 
-    const canvasDownload = async () => {
-        //This works on MacOS but not IOS
-        const canvas = await html2canvas(imageResultRef.current);
-        const dataURL = canvas.toDataURL('image/png');
-        saveAs(dataURL, 'my-shake-it.png', 'image/png');
-    };
+    const imageDownload = useCallback(() => {
+        if (imageResultRef.current === null) {
+            return
+        }
 
-    const regDownload = async () => {
-        await htmlToImage.toPng(imageResultRef.current)
-            .then(function (dataUrl) {
-                saveAs( dataUrl, 'my-shake-it.png');
+        toPng(imageResultRef.current, { cacheBust: true, })
+            .then((dataUrl) => {
+                const link = document.createElement('a')
+                link.download = 'my-shake-it.png'
+                link.href = dataUrl
+                link.click()
             })
-            .catch(function (error) {
-                console.log("Oops, something went wrong.", error)
+            .catch((err) => {
+                console.log(err)
             })
+    }, [imageResultRef.current])
+
+        //This works on MacOS but not IOS
+        // const canvasDownload = async () => {
+        // const canvas = await html2canvas(imageResultRef.current);
+        // const dataURL = canvas.toDataURL('image/png');
+        // saveAs(dataURL, 'my-shake-it.png', 'image/png');
+        // }
+
+    const regDownload = () => {
+        htmlToImage.toPng(imageResultRef.current)
+        .then(function (dataUrl) {
+            saveAs(dataUrl, 'my-shake-it.png');
+        })
+        .catch(function (error) {
+            console.log("Oops, something went wrong.", error)
+        })
     }
 
 
     const handleDownload = () => {
         const safari = checkBrowser()
         console.log(safari)
-        // if(safari) {
-        //     canvasDownload()
-        // } else {
-        //     regDownload()
-        // }
-        regDownload()
+        if(safari) {
+            imageDownload()
+            // canvasDownload()
+        } else {
+            regDownload()
+        }
     }
 
     const StyledImage = styled('img')(props => ({
