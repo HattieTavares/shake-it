@@ -11,7 +11,6 @@ import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
 import html2canvas from "html2canvas";
-import screenshot from 'image-screenshot';
 
 function Image() {
 
@@ -41,31 +40,7 @@ function Image() {
         }
     }
 
-    const imageDownload = useCallback(() => {
-        if (imageResultRef.current === null) {
-            return
-        }
-
-        toPng(imageResultRef.current, { cacheBust: true, })
-            .then((dataUrl) => {
-                const link = document.createElement('a')
-                link.download = 'my-shake-it.png'
-                link.href = dataUrl
-                link.click()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [imageResultRef.current])
-
-        //This works on MacOS but not IOS
-        // const canvasDownload = async () => {
-        // const canvas = await html2canvas(imageResultRef.current);
-        // const dataURL = canvas.toDataURL('image/png');
-        // saveAs(dataURL, 'my-shake-it.png', 'image/png');
-        // }
-
-    const regDownload = () => {
+    const regDownload = async () => {
         htmlToImage.toPng(imageResultRef.current)
         .then(function (dataUrl) {
             saveAs(dataUrl, 'my-shake-it.png');
@@ -75,13 +50,37 @@ function Image() {
         })
     }
 
+    const safariDownload = () => {
+        setTimeout(() => {
+            // ios/macos redundant painting
+            htmlToImage.toPng(imageResultRef.current)
+            .then(() => {
+              htmlToImage.toPng(imageResultRef.current)
+              .then(() => {
+                htmlToImage.toPng(imageResultRef.current)
+                .then(function (dataUrl) {
+                    saveAs(dataUrl, 'my-shake-it.png');
+                })
+              })
+            })
+            .catch((error) => {
+              console.error('oops, something went wrong!', error);
+              alert('Ooops! Something went wrong. Try again.');
+            });
+          }, 1500);
+
+        //This works to download but doesn't support filters...
+        // const canvas = await html2canvas(imageResultRef.current);
+        // const dataURL = canvas.toDataURL('image/png');
+        // saveAs(dataURL, 'my-shake-it.png', 'image/png');
+    }
+
 
     const handleDownload = () => {
         const safari = checkBrowser()
         console.log(safari)
         if(safari) {
-            imageDownload()
-            // canvasDownload()
+            safariDownload()
         } else {
             regDownload()
         }
