@@ -41,38 +41,32 @@ function Image() {
     }
 
     const canvasDownload = async () => {
+        //This works on MacOS but not IOS
         const canvas = await html2canvas(imageResultRef.current);
         const dataURL = canvas.toDataURL('image/png');
         saveAs(dataURL, 'my-shake-it.png', 'image/png');
     };
 
-
-    const handleDownload = () => {
-        const safari = checkBrowser()
-        console.log(safari)
-        if(safari) {
-            canvasDownload()
-            // htmlToImage.toPng(imageResultRef.current)
-            // .then(function (dataUrl) {
-            //     saveAs(dataUrl, 'my-shake-it.png');
-            //     //need to run twice for Safari to download properly
-            //     htmlToImage.toPng(imageResultRef.current)
-            //     .then(function (dataUrl) {
-            //         saveAs(dataUrl, 'my-shake-it.png');
-            //     })
-            //     .catch(function (error) {
-            //         console.log("Oops, something went wrong.", error)
-            //     })
-            // })
-        } else {
-            htmlToImage.toPng(imageResultRef.current)
+    const regDownload = async () => {
+        await htmlToImage.toPng(imageResultRef.current)
             .then(function (dataUrl) {
-                saveAs(dataUrl, 'my-shake-it.png');
+                saveAs( dataUrl, 'my-shake-it.png');
             })
             .catch(function (error) {
                 console.log("Oops, something went wrong.", error)
             })
-        }
+    }
+
+
+    const handleDownload = () => {
+        const safari = checkBrowser()
+        console.log(safari)
+        // if(safari) {
+        //     canvasDownload()
+        // } else {
+        //     regDownload()
+        // }
+        regDownload()
     }
 
     const StyledImage = styled('img')(props => ({
