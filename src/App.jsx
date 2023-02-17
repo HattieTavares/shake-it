@@ -37,11 +37,20 @@ function App() {
           textAlign: "center",
         }}
       >
-        <Header />
-        <Overview />
-        <Image />
-        <Customizations />
-        <Footer />
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          maxWidth: "100ch",
+        }}>
+          <Header />
+          <Overview />
+          <Image />
+          <Customizations />
+          <Footer />
+        </div>
       </div>
     </CustomContext.Provider>
   )

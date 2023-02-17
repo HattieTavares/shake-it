@@ -1,5 +1,9 @@
 export const fontChoices = [
     {
+      "name": " -- Choose a Font -- ",
+      "class": ""
+    },
+    {
       "name": "Just Me Again Down Here",
       "class": "just-me-font"
     },

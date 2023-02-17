@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { TextField } from '@mui/material'
 import { CustomContext } from "../App";
+import { styled } from '@mui/system';
 
 export default function TextInput() {
     const {userText, setUserText} = useContext(CustomContext);
@@ -13,11 +14,12 @@ export default function TextInput() {
         }))
     }
 
+
     return (
         <form action="">
-            <TextField id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} helperText="Character limit per input: 34" placeholder="Your Text Here" variant="outlined" name="topText" value={userText.topText} onChange={handleChange} />
+            <TextField sx={{backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="topText" value={userText.topText} onChange={handleChange} />
             
-            <TextField id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} helperText=" " placeholder="Your Text Here" variant="outlined" name="bottomText" value={userText.bottomText} onChange={handleChange} />
+            <TextField sx={{backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="bottomText" value={userText.bottomText} onChange={handleChange} />
         </form>
     )
 }

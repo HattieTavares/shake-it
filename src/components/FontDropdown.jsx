@@ -13,13 +13,14 @@ export default function FontDropdown() {
   const handleChange = (e) => setFontSelection(e.target.value)
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120}}>
       <FormControl fullWidth>
-        <InputLabel>-- Choose a Font --</InputLabel>
         <Select
           onChange={handleChange}
           value={fontSelection}
-          label="fonts"
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
+          sx={{backgroundColor:"white", borderRadius:"0px"}}
         >
           {fontChoices.map(font => <MenuItem value={font.class} key={font.class}>{font.name}</MenuItem>)}
         </Select>

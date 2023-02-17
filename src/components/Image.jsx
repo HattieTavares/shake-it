@@ -1,16 +1,15 @@
 import React from 'react'
-import { useContext, useCallback, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { Box } from "@mui/material"
 import { Grid } from "@mui/material"
 import { Button } from '@mui/material';
-import { styled} from '@mui/system';
+import { styled } from '@mui/system';
 import polaroidFrame from "/polaroidFrame.png"
 import { CustomContext } from '../App';
 import "../styles/userStyling.css"
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import { saveAs } from 'file-saver';
-import html2canvas from "html2canvas";
 
 function Image() {
 
@@ -68,13 +67,7 @@ function Image() {
               alert('Ooops! Something went wrong. Try again.');
             });
           }, 1500);
-
-        //This works to download but doesn't support filters...
-        // const canvas = await html2canvas(imageResultRef.current);
-        // const dataURL = canvas.toDataURL('image/png');
-        // saveAs(dataURL, 'my-shake-it.png', 'image/png');
     }
-
 
     const handleDownload = () => {
         const safari = checkBrowser()
@@ -90,11 +83,18 @@ function Image() {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-      }))
+    }))
 
     const renderImage = () => (
         <StyledImage className={filterSelection} src={imageFile} alt="Your Uploaded Photo" />
     )
+
+    const StyledButton = styled('button')(props => ({
+        backgroundColor:"white",
+        padding: "0.5em 1em",
+        textAlign: "center",
+        border: "1px solid black"
+    }))
 
     return(
         <Grid sx={{
@@ -104,7 +104,6 @@ function Image() {
         }}>
             <Box sx={{
                 boxShadow:  2,
-                
                 backgroundImage: `url(${polaroidFrame})`,
                 backgroundRepeat: "no-repeat",
                 height: "420px",
@@ -139,7 +138,7 @@ function Image() {
                 </Box>
             </Box>
             <input onChange={handleChange} ref={uploadImageRef} type={"file"} accept={"image/*"} hidden />
-            <Button disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Photo</Button>
+            <StyledButton disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Photo</StyledButton>
         </Grid>
     )
 }
