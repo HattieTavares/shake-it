@@ -16,10 +16,10 @@ export default function TextInput() {
 
 
     return (
-        <form action="">
-            <TextField sx={{backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="topText" value={userText.topText} onChange={handleChange} />
+        <form action="" style={{display:"flex", flexDirection:"column"}}>
+            <TextField sx={{width: "350px", backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="topText" value={userText.topText} onChange={handleChange} />
             
-            <TextField sx={{backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="bottomText" value={userText.bottomText} onChange={handleChange} />
+            <TextField sx={{width: "350px", backgroundColor:"white", border:"1px solid black", textAlign:"center"}} id="outlined-basic" margin="normal" inputProps={{ maxLength: 34 }} placeholder="Your Text Here" variant="outlined" name="bottomText" value={userText.bottomText} onChange={handleChange} />
         </form>
     )
 }

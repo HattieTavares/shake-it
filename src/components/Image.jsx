@@ -90,9 +90,12 @@ function Image() {
     )
 
     const StyledButton = styled('button')(props => ({
+        width:"80%",
         backgroundColor:"white",
-        padding: "0.5em 1em",
+        padding: "0.4em",
+        fontFamily:"Just Me Again Down Here",
         textAlign: "center",
+        fontSize:"1.5rem",
         border: "1px solid black"
     }))
 
@@ -138,7 +141,7 @@ function Image() {
                 </Box>
             </Box>
             <input onChange={handleChange} ref={uploadImageRef} type={"file"} accept={"image/*"} hidden />
-            <StyledButton disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Photo</StyledButton>
+            <StyledButton sx={{marginTop:"10px",}} disabled={!imageFile} onClick={handleDownload} variant="outlined">Download Image</StyledButton>
         </Grid>
     )
 }

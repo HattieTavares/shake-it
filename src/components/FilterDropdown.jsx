@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -14,13 +13,13 @@ export default function FilterDropdown() {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl>
         <Select
           onChange={handleChange}
           value={filterSelection}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
-          sx={{backgroundColor:"white", borderRadius:"0px"}}
+          sx={{width: "350px", backgroundColor:"white", borderRadius:"0px"}}
         >
           {filterChoices.map(filter => <MenuItem value={filter.class} key={filter.class}>{filter.name}</MenuItem>)}
         </Select>

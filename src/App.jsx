@@ -34,23 +34,21 @@ function App() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          textAlign: "center",
         }}
       >
+        <Header />
+        
         <div style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          textAlign: "center",
           maxWidth: "100ch",
         }}>
-          <Header />
-          <Overview />
           <Image />
           <Customizations />
-          <Footer />
         </div>
+        <Footer />
       </div>
     </CustomContext.Provider>
   )

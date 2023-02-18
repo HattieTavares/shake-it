@@ -13,6 +13,41 @@
     filter: brightness(1.25) contrast(.85) grayscale(1);
 }
 
+.aged-filter {
+    -webkit-filter: brightness(1.2) contrast(.85) saturate(.05) sepia(.2);
+    filter: brightness(1.2) contrast(.85) saturate(.05) sepia(.2);
+}
+
+.morning-filter {
+    -webkit-filter: sepia(.5) contrast(1.05) brightness(1.05) saturate(1.35);
+    filter: sepia(.5) contrast(1.05) brightness(1.05) saturate(1.35);
+}
+
+.twilight-filter {
+    -webkit-filter: sepia(.4) contrast(1.2) brightness(.9) saturate(1.4) hue-rotate(-10deg);
+    filter: sepia(.4) contrast(1.2) brightness(.9) saturate(1.4) hue-rotate(-10deg);
+}
+
+.retro-filter {
+    -webkit-filter: sepia(.25) contrast(1.1) brightness(1.1);
+    filter: sepia(.25) contrast(1.1) brightness(1.1);
+}
+
+.glow-filter {
+    -webkit-filter: sepia(.35) contrast(.8) brightness(1.25) saturate(1.4);
+    filter: sepia(.35) contrast(.8) brightness(1.25) saturate(1.4);
+}
+
+.romantic-filter {
+    -webkit-filter: contrast(1.1) brightness(1.1);
+    filter: contrast(1.1) brightness(1.1);
+}
+
+.drama-filter {
+    -webkit-filter: sepia(.35) saturate(1.1) contrast(1.5);
+    filter: sepia(.35) saturate(1.1) contrast(1.5);
+}
+
 .just-me-font {
     font-family: 'Just Me Again Down Here', cursive;
 }
@@ -23,4 +58,40 @@
 
 .marker-font {
     font-family: 'Permanent Marker', cursive;
+}
+
+.caveat-font {
+    font-family: 'Caveat', cursive;
+}
+
+.coming-soon-font {
+    font-family: 'Coming Soon', cursive;
+}
+
+.dancing-font {
+    font-family: 'Dancing Script', cursive;
+}
+
+.dawning-font {
+    font-family: 'Dawning of a New Day', cursive;
+}
+
+.fuzzy-bubbles-font {
+    font-family: 'Fuzzy Bubbles', cursive;
+}
+
+.melody-font {
+    font-family: 'Hi Melody', cursive;
+}
+
+.mynerve-font {
+    font-family: 'Mynerve', cursive;
+}
+
+.reenie-beanie-font {
+    font-family: 'Reenie Beanie', cursive;
+}
+
+.square-peg-font {
+    font-family: 'Square Peg', cursive;
 }
